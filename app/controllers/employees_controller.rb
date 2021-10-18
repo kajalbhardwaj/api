@@ -9,11 +9,11 @@ class EmployeesController < ApplicationController
    end
    
    def create
-    @employee = Employee.create(employee_params)
+    @employee = Employee.new(employee_params)
     if @employee.save
-    render json: @employee
+    render json: @employee, status: :created, location: @employee
     else 
-      render json: @employee
+      render json: @employee.errors, status: :unprocessable_entity
     end
    end 
    
@@ -21,13 +21,13 @@ class EmployeesController < ApplicationController
      if @employee.update(employee_params)
       render json: @employee
      else
-      render json: @employee
+      render json: @employee.errors, status: :unprocessable_entity
      end
    end 
    
    def destroy
     @employee.destroy
-    render json: @employee
+    #render json: @employee
    end 
  
  private
