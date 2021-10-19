@@ -1,8 +1,9 @@
 class EmployeesController < ApplicationController
-  def index
+   def index
    @employees = Employee.all
-   render json: @employees
-  end
+   render json: @employees, only: [:name, :employee_id]
+   end
+
    
    def show
       render json: @employee
@@ -12,16 +13,12 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
     if @employee.save
     render json: @employee, status: :created, location: @employee
-    else 
-      render json: @employee.errors, status: :unprocessable_entity
     end
    end 
    
    def update
      if @employee.update(employee_params)
       render json: @employee
-     else
-      render json: @employee.errors, status: :unprocessable_entity
      end
    end 
    
