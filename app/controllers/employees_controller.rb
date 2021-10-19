@@ -27,7 +27,7 @@ class EmployeesController < ApplicationController
    
    def destroy
     @employee.destroy
-    #render json: @employee
+    render json: @employee
    end 
  
  private
