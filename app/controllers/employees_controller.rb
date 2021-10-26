@@ -2,11 +2,12 @@ class EmployeesController < ApplicationController
    before_action :find_employee, only: [:show, :update, :destroy]
   def index
    @employees = Employee.all
-   render json: @employees, only: [:name, :employee_id]
+   render json: @employees, only: [:name, :employee_id, :surname, :profile, :department]
    end
 
    
    def show
+
     #@employee = Employee.find(params[:id])
       render json: @employee
    end
@@ -25,12 +26,11 @@ class EmployeesController < ApplicationController
    
    def destroy
     @employee.destroy
-    render json: @employee
    end 
  
  private
   def employee_params
-   params.require(:employees).permit(:name, :employee_id)
+   params.require(:employee).permit(:name, :employee_id, :surname, :profile, :department)
   end
   def find_employee
    @employee = Employee.find(params[:id])
